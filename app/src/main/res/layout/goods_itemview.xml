@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content" android:padding="10dp">
+
+    <ImageView
+            android:layout_width="130dp"
+            android:layout_height="130dp" app:srcCompat="@drawable/image_goods" android:id="@+id/goods_image"
+            android:layout_margin="4dp"/>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <TextView
+                android:text="貨物名稱：HAHAHA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/goods_name" android:textSize="25sp"
+                android:textColor="#252c41"/>
+        <TextView
+                android:text="目的驛站：阿卡迪亞"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/goods_station" android:textSize="20sp"
+                android:layout_marginTop="3dp"/>
+        <TextView
+                android:text="貨品狀態：運送中..."
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/goods_status" android:textSize="20sp"
+                android:layout_marginTop="3dp"/>
+        <TextView
+                android:text="重量：500 g"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/goods_weight" android:textSize="20sp"
+                android:layout_marginTop="3dp"/>
+    </LinearLayout>
+</LinearLayout>

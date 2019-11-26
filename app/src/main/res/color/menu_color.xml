@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="#ebedec" android:state_checked="true" />   //點選狀態
+    <item android:color="#4c5870" android:state_checked="false" />  //非點選狀態
+</selector>

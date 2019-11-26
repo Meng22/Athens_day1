@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Athens</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="station">
+        <item>雅典</item>
+        <item>菲基斯</item>
+        <item>阿卡迪亞</item>
+        <item>斯巴達</item>
+    </string-array>
+</resources>
