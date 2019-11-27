@@ -13,11 +13,7 @@ object API {
     var token: String? = null
     val apiInterface: Api_Interface by lazy {  //需要使用到時，只會初始化一次
 
-        val logging = HttpLoggingInterceptor(object:HttpLoggingInterceptor.Logger {
-            override fun log(message: String) {
-                Log.d("server", message.toByteArray(Charsets.UTF_8).toString(Charsets.UTF_8))
-            }
-        })
+        val logging = HttpLoggingInterceptor()
         logging.level = (HttpLoggingInterceptor.Level.BODY)
 
         val myOkHttpClient = OkHttpClient.Builder()
@@ -30,6 +26,7 @@ object API {
                     val requestBuilder = original.newBuilder()
                         .header("Content-Type", "application/json")
                         .header("Accept", "application/json")
+                        .header("Connection","keep-alive")
 
                     if(token != null){
                         requestBuilder.addHeader("Authorization","Bearer $token")
@@ -41,7 +38,7 @@ object API {
 
         //retrofit實體
         return@lazy Retrofit.Builder()
-            .baseUrl("http://03314e48.ngrok.io")
+            .baseUrl("http://35.229.230.23")
             .client(myOkHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

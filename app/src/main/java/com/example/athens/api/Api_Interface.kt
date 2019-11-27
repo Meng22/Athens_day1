@@ -12,16 +12,16 @@ interface Api_Interface {
     @POST("/api/login")
     fun login(@Body loginRequest: LoginRequest): Call<LoginResponse>
 
-    @GET("/api/tasklist")
+    @GET("/api/preparedTasks")
     fun showGoods(): Call<GoodsResponse>
 
     //接單
     @POST("/api/tasks")
     fun task(@Body taskRequest: TaskRequest): Call<TasksResponse>
 
-    //接單內容
+    //顯示接單內容
     @GET("/api/myTask")
-    fun myTask(): Call<TasksResponse>
+    fun myTask(): Call<MyTaskResponse>
 
     //checkin
     @POST("/api/checkin")
@@ -30,4 +30,16 @@ interface Api_Interface {
     //checkout
     @POST("/api/checkout")
     fun checkout(@Body checkRequest: CheckoutRequest): Call<CheckResponse>
+
+    //cancel
+    @POST("/api/statusCancel")
+    fun cancel(@Body cancelRequest: CancelRequest): Call<CancelResponse>
+
+    //跑量紀錄
+    @GET("/api/medalStatus")
+    fun medalStatus(): Call<medalStatusResponse>
+
+    //跑者運送紀錄
+    @GET("/api/runnerHistory")
+    fun runnerHistory(): Call<HistoryResponse>
 }

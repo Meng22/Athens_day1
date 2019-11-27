@@ -14,15 +14,14 @@
                 tools:listitem="@layout/goods_itemview"
                 app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" android:id="@+id/rv_station"
-                app:layout_constraintTop_toBottomOf="@id/linearlayout"/>
+                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/linearlayout"/>
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/linearlayout"
-                app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="10dp"
-                android:layout_marginStart="10dp" app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="9dp" android:layout_marginRight="9dp"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/linear_text">
             <ImageView
                     android:src="@drawable/flag_athens"
                     android:layout_width="wrap_content"
@@ -39,6 +38,33 @@
                     android:src="@drawable/flag_sparta"
                     android:layout_width="wrap_content"
                     android:layout_height="60dp" android:id="@+id/btn_sparta" android:layout_weight="1"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteX="10dp" app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/linear_text">
+            <TextView
+                    android:text="    雅典    "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textView" android:layout_weight="1"
+                    android:layout_gravity="center" android:gravity="center"/>
+            <TextView
+                    android:text="  菲基斯  "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textView4" android:layout_weight="1"
+                    android:gravity="center" android:layout_gravity="center"/>
+            <TextView
+                    android:text="阿卡迪亞"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textView5" android:layout_weight="1"
+                    android:gravity="center" android:layout_gravity="center"/>
+            <TextView
+                    android:text=" 斯巴達  "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textView6" android:layout_weight="1"
+                    android:gravity="center" android:layout_gravity="center"/>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

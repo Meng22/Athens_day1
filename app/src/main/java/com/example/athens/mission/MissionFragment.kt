@@ -4,6 +4,7 @@ package com.example.athens.mission
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
 import com.example.athens.HomeActivity
 import com.example.athens.R
 import com.example.athens.api.*
@@ -45,6 +47,9 @@ class MissionFragment : Fragment() {
     private var shipmentDes = "無"
     private var shipmentStatus = "無"
 
+
+    private var shipmentId = 0
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_mission, container, false)
     }
@@ -54,12 +59,7 @@ class MissionFragment : Fragment() {
             isEnter = true
 
             //初始畫面
-            shipmentName = "無訂單"
-            shipmentStart = "無"
-            shipmentDes = "無"
-            shipmentStatus = "無"
-            myTask()
-
+            initial()
             com.example.athens.println("======刷新畫面")
 
         }else{
@@ -78,7 +78,7 @@ class MissionFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         //初始畫面
-        renewText()
+        initial()
 
         //相機權限
         permission()
@@ -91,22 +91,42 @@ class MissionFragment : Fragment() {
             val intent = Intent(this.context, CaptureActivity::class.java)
             startActivityForResult(intent,1)
         }
-
-        //debug only
-        button_start.setOnClickListener {
-            val result = "斯巴達"
-            Toast.makeText(this.context, "地點:" + result, Toast.LENGTH_LONG).show()
-
-            //check API
-            checkAPI("準備中", result)
+        //求救電話
+        btn_sos.setOnClickListener {
+            val dial = "119"
+            val intent = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", dial, null))
+            startActivity(intent)
         }
 
-        button_end.setOnClickListener {
-            val result = "阿卡迪亞"
-            Toast.makeText(this.context, "地點:" + result, Toast.LENGTH_LONG).show()
+        //註銷訂單
+        btn_alert.setOnClickListener {
+            val condition_list = arrayOf("出了車禍要去醫院","貨物被山賊劫走","貨物被豆芽咬爛","其他")
+            var position = 0            //設定position
+            AlertDialog.Builder(this.context!!)
+                .setTitle("回報訂單的狀況，我....")
+                .setSingleChoiceItems(condition_list, 0) { _, i ->
+                        position = i }
+                .setPositiveButton("註銷訂單") {dialog,_ ->
 
-            //check API
-            checkAPI("運送中", result)
+                    if(shipmentId == 0) {
+                        Toast.makeText(context, "尚未接單，無法註銷", Toast.LENGTH_SHORT).show()
+                    }else if(shipmentStatus == "準備中"){
+                        Toast.makeText(context, "貨物尚未出發，無法註銷", Toast.LENGTH_SHORT).show()
+                    }else if(shipmentStatus == "運送中"){
+                        cancel()
+                    }
+
+                    dialog.cancel()
+                }
+                .setNegativeButton("沒事"){dialog,_ ->
+                    dialog.cancel()
+                }
+                .show()
+        }
+
+        //更新訂單
+        btn_renew.setOnClickListener {
+            initial()
         }
 
     }
@@ -136,10 +156,14 @@ class MissionFragment : Fragment() {
                 }
                 if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
                     val result = bundle.getString(CodeUtils.RESULT_STRING)
-                    Toast.makeText(this.context, "地點:" + result, Toast.LENGTH_LONG).show()
+                    Toast.makeText(this.context, "掃描：" + result, Toast.LENGTH_LONG).show()
 
-                    //check API
-                    checkAPI(shipmentStatus, result!!)
+                    if (shipmentId == 0){
+                        Toast.makeText(context, "目前無訂單！", Toast.LENGTH_SHORT).show()
+                    }else{
+                        //check API
+                        checkAPI(shipmentStatus, result!!)
+                    }
 
                 } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
                     Toast.makeText(this.context, "解析二维码失败", Toast.LENGTH_LONG).show()
@@ -147,6 +171,8 @@ class MissionFragment : Fragment() {
             }
         }
     }
+
+    //相機權限
     fun permission(){
         if (ContextCompat.checkSelfPermission(this.context!!,  Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale((activity as HomeActivity), Manifest.permission.CAMERA)) {
@@ -171,18 +197,22 @@ class MissionFragment : Fragment() {
 
 
     fun myTask(){
-        API.apiInterface.myTask().enqueue(object: Callback<TasksResponse>{
-            override fun onFailure(call: Call<TasksResponse>, t: Throwable) {
+        API.apiInterface.myTask().enqueue(object: Callback<MyTaskResponse>{
+            override fun onFailure(call: Call<MyTaskResponse>, t: Throwable) {
             }
-            override fun onResponse(call: Call<TasksResponse>, response: Response<TasksResponse>) {
-                if (response.isSuccessful){
+            override fun onResponse(call: Call<MyTaskResponse>, response: Response<MyTaskResponse>) {
+                if (response.code() == 200){
                     val responsebody = response.body()
                     val name = responsebody!!.good_name
                     val start_station_id = responsebody.start_station_id
                     val des_station_id = responsebody.des_station_id
                     val status = responsebody.status
+                    val shipment_id = responsebody.id
+                    val image = responsebody.photo_url
 
+                    Glide.with(shipment_image.context).load(image).into(shipment_image)
                     shipmentName = name
+                    shipmentId = shipment_id
                     startStation(start_station_id)
                     destination(des_station_id)
                     shipmentStatus = status
@@ -195,22 +225,24 @@ class MissionFragment : Fragment() {
 
     //顯示目的地
     fun destination(mode: Int){
+        if(!isResumed) return
+
         when(mode){
             1 ->{
                 shipmentDes = "雅典"
-//                flag_1.visibility = View.VISIBLE
+                flag_1.visibility = View.VISIBLE
             }
             2 ->{
                 shipmentDes = "菲基斯"
-//                flag_2.visibility = View.VISIBLE
+                flag_2.visibility = View.VISIBLE
             }
             3 ->{
                 shipmentDes = "阿卡迪亞"
-//                flag_3.visibility = View.VISIBLE
+                flag_3.visibility = View.VISIBLE
             }
             4 ->{
                 shipmentDes = "斯巴達"
-//                flag_4.visibility = View.VISIBLE
+                flag_4.visibility = View.VISIBLE
             }
         }
     }
@@ -232,56 +264,109 @@ class MissionFragment : Fragment() {
         }
     }
 
-    //更新字串
+    //更新顯示字串
     fun renewText(){
+        if(!isResumed) return
+
         tv_name.text = "訂單名稱：" + shipmentName
         tv_start.text = "起始驛站：" + shipmentStart
-        tv_destination.text = "目的驛站：" + shipmentDes
+        tv_des.text = "目的驛站：" + shipmentDes
         tv_status.text = "狀態：" + shipmentStatus
     }
 
     //check in/out
-    fun checkAPI(status: String, station: String){
+    fun checkAPI(status: String, result: String){
         if (status == "準備中"){
-            API.apiInterface.checkin(CheckinRequest(station)).enqueue(object : Callback<CheckResponse>{
-                override fun onFailure(call: Call<CheckResponse>, t: Throwable) {
-                }
-                override fun onResponse(call: Call<CheckResponse>, response: Response<CheckResponse>) {
-                    if (response.isSuccessful) {
-                        val responsebody = response.body()!!
-                        if (responsebody.data != null) {
-                            val newStatus = responsebody.data.status
-                            shipmentStatus = newStatus
-                            renewText()
-                            return
-                        }
-
-                        val message = responsebody.message
-                        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+            if (shipmentStart == result){
+                API.apiInterface.checkin(CheckinRequest(result)).enqueue(object : Callback<CheckResponse>{
+                    override fun onFailure(call: Call<CheckResponse>, t: Throwable) {
                     }
-                }
-            })
+                    override fun onResponse(call: Call<CheckResponse>, response: Response<CheckResponse>) {
+                        if (response.isSuccessful) {
+                            val responsebody = response.body()!!
+                            if (responsebody.data != null) {
+                                val newStatus = responsebody.data.status
+                                shipmentStatus = newStatus
+                                renewText()
+                                return
+                            }
+                        }
+                    }
+                })
+            }else{
+                Toast.makeText(context, "你送錯啦，請跟驛站人員確認！", Toast.LENGTH_SHORT).show()
+            }
+
         }else if (status == "運送中"){
-            API.apiInterface.checkout(CheckoutRequest(station)).enqueue(object : Callback<CheckResponse>{
-                override fun onFailure(call: Call<CheckResponse>, t: Throwable) {
-                }
-                override fun onResponse(call: Call<CheckResponse>, response: Response<CheckResponse>) {
-                    if (response.isSuccessful) {
-                        val responsebody = response.body()!!
-                        if (responsebody.data != null) {
-                            val newStatus = responsebody.data.status
-                            shipmentStatus = newStatus
-                            renewText()
-                            return
-                        }
-
-                        val message = responsebody.message
-                        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+            if (shipmentDes == result){
+                API.apiInterface.checkout(CheckoutRequest(result)).enqueue(object : Callback<CheckResponse>{
+                    override fun onFailure(call: Call<CheckResponse>, t: Throwable) {
                     }
-                }
-            })
-        }
+                    override fun onResponse(call: Call<CheckResponse>, response: Response<CheckResponse>) {
+                        if (response.isSuccessful) {
+                            val responsebody = response.body()!!
+                            if (responsebody.data != null) {
+                                val newStatus = responsebody.data.status
+                                shipmentStatus = newStatus
+                                renewText()
+                                Toast.makeText(context, "恭喜完成任務！", Toast.LENGTH_LONG).show()
+                                return
+                            }
+                        }else if(response.code() == 409){
+                            val responsebody = response.body()
+                            val message = responsebody!!.message
+                            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                })
+            }else{
+                Toast.makeText(context, "你送錯啦，請跟驛站人員確認！", Toast.LENGTH_SHORT).show()
+            }
+
+        }else return
 
     }
+
+    //更新畫面狀態
+    fun initial(){
+        if(!isResumed) return
+
+        shipmentName = "無訂單"
+        shipmentStart = "無"
+        shipmentDes = "無"
+        shipmentStatus = "無"
+
+        flag_1.visibility = View.INVISIBLE
+        flag_2.visibility = View.INVISIBLE
+        flag_3.visibility = View.INVISIBLE
+        flag_4.visibility = View.INVISIBLE
+
+        renewText()
+
+    }
+    //註銷訂單
+    fun cancel() {
+        println("==========$shipmentId")
+        API.apiInterface.cancel(CancelRequest(shipmentId)).enqueue(object : Callback<CancelResponse> {
+            override fun onFailure(call: Call<CancelResponse>, t: Throwable) {
+                println("=============$t")
+            }
+
+            override fun onResponse(call: Call<CancelResponse>, response: Response<CancelResponse>) {
+                if (response.isSuccessful) {
+                    val responsebody = response.body()
+                    val message_status = responsebody!!.message
+                    shipmentStatus = message_status
+                    renewText()
+                    Toast.makeText(context, "遭遇不測，貨物${shipmentStatus}", Toast.LENGTH_SHORT).show()
+                    return
+                } else if (response.code() == 409) {
+                    println("===============$response")
+                }
+            }
+        })
+
+    }
+
 
 }

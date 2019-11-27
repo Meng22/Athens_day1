@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.athens.R
 import com.example.athens.api.GoodsData
 
@@ -41,7 +42,7 @@ class GoodsAdapter: RecyclerView.Adapter<GoodsAdapter.ViewHolder>() {
         val status = view.findViewById<TextView>(R.id.goods_status)
 
         fun bind(item: GoodsData){
-//            Glide.with(image.context).load("url").into(image)
+            Glide.with(image.context).load(item.photo_url).into(image)
             name.text = "訂單名稱：${item.good_name}"
             showStation(item.des_station_id, station)
             status.text = "貨品狀態：${item.status}"

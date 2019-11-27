@@ -22,10 +22,11 @@
             android:digits="1234567890qwertyuiopasdfghjklzxcvbnm"
             android:ems="10"
             android:id="@+id/ed_name"
-            android:hint="請輸入跑者姓名" android:layout_marginStart="8dp" app:layout_constraintStart_toStartOf="parent"
+            android:hint="跑者帳號 (英文小寫+數字)" android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="8dp" android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginRight="8dp" android:layout_marginTop="220dp"
-            app:layout_constraintTop_toTopOf="@+id/background" android:text="meng"/>
+            app:layout_constraintTop_toTopOf="@+id/background"/>
     <EditText
             android:layout_width="220dp"
             android:layout_height="wrap_content"
@@ -34,10 +35,10 @@
             android:ems="10"
             android:background="@drawable/ic_solid_shape"
             android:id="@+id/ed_password"
-            android:hint="請輸入密碼" android:layout_marginStart="8dp" app:layout_constraintStart_toStartOf="parent"
+            android:hint="跑者密碼" android:layout_marginStart="8dp" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="8dp" android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginRight="8dp" android:layout_marginTop="32dp"
-            app:layout_constraintTop_toBottomOf="@+id/ed_name" android:text="123"/>
+            app:layout_constraintTop_toBottomOf="@+id/ed_name"/>
     <Button
             android:text="LOG IN"
             android:layout_width="200dp"

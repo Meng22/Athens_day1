@@ -5,9 +5,9 @@
               android:layout_height="wrap_content" android:layout_marginBottom="5dp">
 
     <TextView
-            android:text="12.60 公里"
+            android:text="貨品：蘋果"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/tv_distance" android:textSize="18sp"
+            android:layout_height="wrap_content" android:id="@+id/history_name" android:textSize="18sp"
             android:textColor="#33363b"/>
     <LinearLayout
             android:orientation="horizontal"
@@ -16,15 +16,15 @@
         <TextView
                 android:text="斯巴達 - 阿卡迪亞"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/tv_where" android:layout_weight="1"/>
+                android:layout_height="wrap_content" android:id="@+id/history_where" android:layout_weight="1"/>
         <TextView
-                android:text="2019-11-26"
+                android:text="20公里"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/tv_time" android:layout_weight="1"/>
+                android:layout_height="wrap_content" android:id="@+id/history_distance" android:layout_weight="1"/>
         <TextView
                 android:text="500g"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/tv_weight" android:layout_weight="1"/>
+                android:layout_height="wrap_content" android:id="@+id/history_weight" android:layout_weight="1"/>
     </LinearLayout>
     <View
             android:id="@+id/divider"

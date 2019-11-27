@@ -5,9 +5,9 @@
               android:layout_height="wrap_content" android:padding="10dp">
 
     <ImageView
-            android:layout_width="130dp"
-            android:layout_height="130dp" app:srcCompat="@drawable/image_goods" android:id="@+id/goods_image"
-            android:layout_margin="4dp"/>
+            android:layout_width="65dp"
+            android:layout_height="65dp" app:srcCompat="@drawable/image_goods" android:id="@+id/goods_image"
+            android:layout_margin="8dp" android:layout_gravity="center"/>
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"

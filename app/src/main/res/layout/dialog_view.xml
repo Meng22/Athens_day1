@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="wrap_content"
+              android:background="@drawable/ic_solid_rectangle_dialog"
+              android:layout_height="wrap_content" android:padding="20dp">
+
+    <TextView
+            android:text="訂單資訊"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/dialog_title" android:textSize="24sp"
+            android:layout_gravity="center" android:textColor="#2d2d2d"/>
+    <TextView
+            android:text="是否要運送「貨物名稱」？"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/dialog_message" android:textSize="16sp"
+            android:layout_marginTop="5dp" android:layout_gravity="center"/>
+    <ImageView
+            android:layout_width="110dp"
+            android:src="@drawable/demo_image"
+            android:layout_height="110dp"
+            android:id="@+id/dialog_image" android:layout_marginTop="10dp" android:layout_gravity="center"
+            android:scaleType="fitXY"/>
+    <TextView
+            android:text="貨物所在："
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/dialog_start" android:textSize="16sp"
+            android:layout_gravity="center" android:layout_marginTop="10dp"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/dialog_des" android:textSize="16sp"
+            android:text="即將送往：" android:layout_gravity="center" android:layout_marginTop="5dp"/>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_marginTop="15dp" android:layout_gravity="center">
+        <Button
+                android:text="取消"
+                android:layout_width="wrap_content"
+                android:background="@drawable/ic_cancel_button"
+                android:layout_height="wrap_content" android:id="@+id/btn_cancel" android:layout_weight="1"
+                android:layout_marginRight="10dp" android:textColor="#EEFFFFFF"/>
+        <Button
+                android:text="確認接單"
+                android:background="@drawable/ic_confirm_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/btn_confirm" android:layout_weight="1"
+                android:layout_marginLeft="10dp"/>
+    </LinearLayout>
+</LinearLayout>

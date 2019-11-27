@@ -7,9 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.athens.R
 import com.example.athens.api.*
 import kotlinx.android.synthetic.main.fragment_shop.*
@@ -63,7 +67,7 @@ class ShopFragment : Fragment() {
         rv_station.adapter = goodsAdapter
         goodsAdapter.setToClick(object : GoodsAdapter.ItemClickListener {
             override fun toClick(item: GoodsData) {
-                toSend(item)
+                showDialog(item)
             }
         })
 
@@ -84,32 +88,15 @@ class ShopFragment : Fragment() {
 
 
     }
-    fun toSend(item: GoodsData){
-        AlertDialog.Builder(this.context!!)
-            .setTitle("訂單資訊")
-            .setMessage("是否要運送貨物${item.good_name}？")
-            .setPositiveButton("沒問題"){dialog,_ ->
-                //接任務api
-                tasks(item)
 
-                //重新load資料
-                renewList()
-                updateLayout(item.start_station_id)
-                com.example.athens.println("================${updateLayout(item.start_station_id)}")
-
-            }
-            .setNegativeButton("取消"){dialog,_ ->
-                dialog.cancel()
-            }
-            .show()
-    }
+    //顯示清單
     fun renewList(){
         API.apiInterface.showGoods().enqueue(object : Callback<GoodsResponse>{
             override fun onFailure(call: Call<GoodsResponse>, t: Throwable) {
                 com.example.athens.println("================$t")
             }
             override fun onResponse(call: Call<GoodsResponse>, response: Response<GoodsResponse>) {
-                if (response.isSuccessful){
+                if (response.code() == 200){
                     val responsebody = response.body()
                     val responselist = responsebody!!.data
                     val goodsList = responselist.toMutableList()
@@ -119,9 +106,16 @@ class ShopFragment : Fragment() {
                     arkadiaList = goodsList.filter { it.start_station_id == 3 }.toMutableList()
                     spartaList = goodsList.filter { it.start_station_id == 4 }.toMutableList()
                 }
+                else if(response.code() == 409){
+                    val responsebody = response.body()
+                    val message = responsebody!!.message
+                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                }
             }
         })
     }
+
+    //接案
     fun tasks(item: GoodsData){
         API.apiInterface.task(TaskRequest(item.id)).enqueue(object : Callback<TasksResponse>{
             override fun onFailure(call: Call<TasksResponse>, t: Throwable) {
@@ -130,9 +124,16 @@ class ShopFragment : Fragment() {
             override fun onResponse(call: Call<TasksResponse>, response: Response<TasksResponse>) {
                 if (response.isSuccessful){
                     val responsebody = response.body()
-                    val runner_id = responsebody!!.runner_id
-                    com.example.athens.println("===============runner_id=$runner_id")
-                    Toast.makeText(context, "已接到任務",Toast.LENGTH_SHORT).show()
+                    val message = responsebody!!.message
+                    Toast.makeText(context, message,Toast.LENGTH_SHORT).show()
+                }else if (response.code() == 409){
+                    println("===============$response")
+                    val responsebody = response.body()
+                    println("===============$responsebody")
+                    if (responsebody != null) {
+                        val message = responsebody.message
+                        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         })
@@ -153,6 +154,79 @@ class ShopFragment : Fragment() {
             }
         }
     }
+
+    fun showDialog(item: GoodsData){
+        val inflater = LayoutInflater.from(this.context)
+        val view = inflater.inflate(R.layout.dialog_view, null)
+        val dialog_mission = AlertDialog.Builder(this.context!!)
+            .setView(view)
+            .show()
+        val dialog_image = view.findViewById<ImageView>(R.id.dialog_image)
+        val dialog_title = view.findViewById<TextView>(R.id.dialog_title)
+        val dialog_message = view.findViewById<TextView>(R.id.dialog_message)
+        val dialog_start = view.findViewById<TextView>(R.id.dialog_start)
+        val dialog_des = view.findViewById<TextView>(R.id.dialog_des)
+        val btn_confirm = view.findViewById<Button>(R.id.btn_confirm)
+        val btn_cancel = view.findViewById<Button>(R.id.btn_cancel)
+
+        Glide.with(dialog_image.context).load(item.photo_url).into(dialog_image)
+        dialog_title.text = "訂單資訊"
+        dialog_message.text = "是否要運送${item.good_name}呢？"
+        showStart(dialog_start, item.start_station_id)
+        showDes(dialog_des, item.des_station_id)
+
+        btn_confirm.setOnClickListener {
+            //接任務api
+            tasks(item)
+            dialog_mission.cancel()
+
+//            //重新load資料
+//            renewList()
+//            updateLayout(item.start_station_id)
+//            com.example.athens.println("================${updateLayout(item.start_station_id)}")
+            dialog_mission.cancel()
+
+        }
+        btn_cancel.setOnClickListener {
+            dialog_mission.cancel()
+        }
+
+
+
+    }
+    fun showStart(station: TextView,mode: Int){
+        when(mode){
+            1 ->{
+                station.text = "貨物所在：雅典"
+            }
+            2 ->{
+                station.text = "貨物所在：菲基斯"
+            }
+            3 ->{
+                station.text = "貨物所在：阿卡迪亞"
+            }
+            4 ->{
+                station.text = "貨物所在：斯巴達"
+            }
+        }
+    }
+    fun showDes(station: TextView,mode: Int){
+        when(mode){
+            1 ->{
+                station.text = "即將送往：雅典"
+            }
+            2 ->{
+                station.text = "即將送往：菲基斯"
+            }
+            3 ->{
+                station.text = "即將送往：阿卡迪亞"
+            }
+            4 ->{
+                station.text = "即將送往：斯巴達"
+            }
+        }
+    }
+
 
 
 

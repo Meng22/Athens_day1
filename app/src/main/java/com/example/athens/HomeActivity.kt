@@ -3,6 +3,7 @@ package com.example.athens
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.example.athens.goods.ShopFragment
 import com.example.athens.mission.MissionFragment
 import com.example.athens.portfolio.PortfolioFragment
@@ -12,9 +13,8 @@ class HomeActivity : AppCompatActivity() {
     private val manager = supportFragmentManager
     private val shopFragment = ShopFragment()
     private val missionFragment = MissionFragment()
-    private val portfolioFragment = PortfolioFragment(
+    private val portfolioFragment = PortfolioFragment()
 
-    )
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.nav_shop -> {
