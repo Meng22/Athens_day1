@@ -5,7 +5,6 @@ data class RegisterRequest(
     val password: String,
     val role: String
 )
-
 data class RegisterResponse(
     val message: String
 )
@@ -18,7 +17,6 @@ data class LoginResponse(
     val data: UserData,
     val message: String
 )
-
 data class UserData(
     val api_token: String,
     val created_at: String,
@@ -30,37 +28,55 @@ data class UserData(
 )
 
 data class GoodsResponse(
-    val data: List<GoodsData>,
-    val message: String
+    val message: String,
+    val data: List<GoodsData>
 )
-
 data class GoodsData(
+    val good_name: String,
     val created_at: String,
-    val des_station: Station,
     val des_station_id: Int,
-    val description: String,
+    val good_id: Int,
     val id: Int,
-    val name: String,
-    val now_station: Station,
-    val now_station_id: Int,
-    val price: Int,
-    val start_station: Station,
+    val runner_id: Any,
     val start_station_id: Int,
     val status: String,
-    val updated_at: String,
-    val weight: Int
-)
-
-data class Station(
-    val created_at: String,
-    val id: Int,
-    val name: String,
     val updated_at: String
 )
 
-data class Goods(
-    val name: String,
-    val des_station: String,
+data class TaskRequest(
+    val shipment_id: Int
+)
+data class TasksResponse(
+    val created_at: String,
+    val des_station_id: Int,
+    val good_id: Int,
+    val good_name: String,
+    val id: Int,
+    val runner_id: Int,
+    val start_station_id: Int,
     val status: String,
-    val weight: Int
+    val updated_at: String
+)
+data class CheckinRequest(
+    val start_station_name: String
+)
+
+data class CheckoutRequest(
+    val des_station_name: String
+)
+data class CheckResponse(
+    val data: ShipmentData?,
+    val message: String
+)
+
+data class ShipmentData(
+    val created_at: String,
+    val des_station_id: Int,
+    val good_id: Int,
+    val good_name: String,
+    val id: Int,
+    val runner_id: Int,
+    val start_station_id: Int,
+    val status: String,
+    val updated_at: String
 )

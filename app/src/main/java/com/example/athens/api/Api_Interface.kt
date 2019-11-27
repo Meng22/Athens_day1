@@ -12,6 +12,22 @@ interface Api_Interface {
     @POST("/api/login")
     fun login(@Body loginRequest: LoginRequest): Call<LoginResponse>
 
-    @GET("/api/goods")
+    @GET("/api/tasklist")
     fun showGoods(): Call<GoodsResponse>
+
+    //接單
+    @POST("/api/tasks")
+    fun task(@Body taskRequest: TaskRequest): Call<TasksResponse>
+
+    //接單內容
+    @GET("/api/myTask")
+    fun myTask(): Call<TasksResponse>
+
+    //checkin
+    @POST("/api/checkin")
+    fun checkin(@Body checkRequest: CheckinRequest): Call<CheckResponse>
+
+    //checkout
+    @POST("/api/checkout")
+    fun checkout(@Body checkRequest: CheckoutRequest): Call<CheckResponse>
 }

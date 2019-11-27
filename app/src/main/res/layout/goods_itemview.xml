@@ -15,22 +15,22 @@
         <TextView
                 android:text="貨物名稱：HAHAHA"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/goods_name" android:textSize="25sp"
+                android:layout_height="wrap_content" android:id="@+id/goods_name" android:textSize="20sp"
                 android:textColor="#252c41"/>
         <TextView
                 android:text="目的驛站：阿卡迪亞"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/goods_station" android:textSize="20sp"
+                android:layout_height="wrap_content" android:id="@+id/goods_station" android:textSize="16sp"
                 android:layout_marginTop="3dp"/>
         <TextView
                 android:text="貨品狀態：運送中..."
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/goods_status" android:textSize="20sp"
+                android:layout_height="wrap_content" android:id="@+id/goods_status" android:textSize="16sp"
                 android:layout_marginTop="3dp"/>
         <TextView
                 android:text="重量：500 g"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/goods_weight" android:textSize="20sp"
+                android:layout_height="wrap_content" android:id="@+id/goods_weight" android:textSize="16sp"
                 android:layout_marginTop="3dp"/>
     </LinearLayout>
 </LinearLayout>

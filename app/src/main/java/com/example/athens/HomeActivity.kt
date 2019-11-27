@@ -3,14 +3,18 @@ package com.example.athens
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import android.widget.TextView
-import com.example.athens.api.MissionFragment
+import com.example.athens.goods.ShopFragment
+import com.example.athens.mission.MissionFragment
+import com.example.athens.portfolio.PortfolioFragment
 
 class HomeActivity : AppCompatActivity() {
+
     private val manager = supportFragmentManager
     private val shopFragment = ShopFragment()
     private val missionFragment = MissionFragment()
+    private val portfolioFragment = PortfolioFragment(
 
+    )
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.nav_shop -> {
@@ -25,6 +29,9 @@ class HomeActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.nav_portfolio -> {
+                val transaction = manager.beginTransaction()
+                transaction.replace(R.id.framelayout, portfolioFragment).commit()
+
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -35,10 +42,14 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+        //初始畫面
         val transaction = manager.beginTransaction()
         transaction.replace(R.id.framelayout, shopFragment).commit()
-
+        //導覽列
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+
+
     }
+
 }

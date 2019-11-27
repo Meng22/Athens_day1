@@ -1,5 +1,6 @@
 package com.example.athens.api
 
+import android.util.Log
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -12,11 +13,16 @@ object API {
     var token: String? = null
     val apiInterface: Api_Interface by lazy {  //需要使用到時，只會初始化一次
 
-        val logging = HttpLoggingInterceptor()
+        val logging = HttpLoggingInterceptor(object:HttpLoggingInterceptor.Logger {
+            override fun log(message: String) {
+                Log.d("server", message.toByteArray(Charsets.UTF_8).toString(Charsets.UTF_8))
+            }
+        })
         logging.level = (HttpLoggingInterceptor.Level.BODY)
 
         val myOkHttpClient = OkHttpClient.Builder()
             .readTimeout(10, TimeUnit.SECONDS)
+            .addInterceptor(logging)
             .addInterceptor(object : Interceptor {
                 override fun intercept(chain: Interceptor.Chain): Response {
                     val original = chain.request()
@@ -31,12 +37,11 @@ object API {
                     return chain.proceed(requestBuilder.build())
                 }
             })
-            .addInterceptor(logging)
             .build()
 
         //retrofit實體
         return@lazy Retrofit.Builder()
-            .baseUrl("http://7008f1b0.ngrok.io")
+            .baseUrl("http://03314e48.ngrok.io")
             .client(myOkHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
