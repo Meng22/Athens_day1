@@ -23,6 +23,7 @@ import com.example.athens.api.*
 import com.uuzuche.lib_zxing.activity.CaptureActivity
 import com.uuzuche.lib_zxing.activity.CodeUtils
 import kotlinx.android.synthetic.main.fragment_mission.*
+import kotlinx.android.synthetic.main.fragment_portfolio.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -46,8 +47,7 @@ class MissionFragment : Fragment() {
     private var shipmentStart = "無"
     private var shipmentDes = "無"
     private var shipmentStatus = "無"
-
-
+    private var shipmentPrice = "無"
     private var shipmentId = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
@@ -124,9 +124,10 @@ class MissionFragment : Fragment() {
                 .show()
         }
 
-        //更新訂單
+        //更新訂單狀態
         btn_renew.setOnClickListener {
             initial()
+            myTask()
         }
 
     }
@@ -209,6 +210,7 @@ class MissionFragment : Fragment() {
                     val status = responsebody.status
                     val shipment_id = responsebody.id
                     val image = responsebody.photo_url
+                    val price = responsebody.price
 
                     Glide.with(shipment_image.context).load(image).into(shipment_image)
                     shipmentName = name
@@ -216,6 +218,7 @@ class MissionFragment : Fragment() {
                     startStation(start_station_id)
                     destination(des_station_id)
                     shipmentStatus = status
+                    shipmentPrice = price.toString()
                     renewText()
 
                 }
@@ -272,6 +275,7 @@ class MissionFragment : Fragment() {
         tv_start.text = "起始驛站：" + shipmentStart
         tv_des.text = "目的驛站：" + shipmentDes
         tv_status.text = "狀態：" + shipmentStatus
+        tv_price.text = "本單收入：" + shipmentPrice
     }
 
     //check in/out
@@ -335,6 +339,7 @@ class MissionFragment : Fragment() {
         shipmentStart = "無"
         shipmentDes = "無"
         shipmentStatus = "無"
+        shipmentPrice = "無"
 
         flag_1.visibility = View.INVISIBLE
         flag_2.visibility = View.INVISIBLE
@@ -359,6 +364,7 @@ class MissionFragment : Fragment() {
                     shipmentStatus = message_status
                     renewText()
                     Toast.makeText(context, "遭遇不測，貨物${shipmentStatus}", Toast.LENGTH_SHORT).show()
+                    shipmentId = 0
                     return
                 } else if (response.code() == 409) {
                     println("===============$response")
@@ -367,6 +373,7 @@ class MissionFragment : Fragment() {
         })
 
     }
+
 
 
 }

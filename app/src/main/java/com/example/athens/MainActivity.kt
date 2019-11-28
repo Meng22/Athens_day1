@@ -46,26 +46,34 @@ class MainActivity : AppCompatActivity() {
         }
         //登入
         btn_login.setOnClickListener {
-            API.apiInterface.login(
-                LoginRequest(
-                    ed_password.text.toString(),
-                    ed_name.text.toString()
-                )
-            ).enqueue(object: Callback<LoginResponse>{
-                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                    println("=================$t")
-                }
-                override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                    if (response.code() == 200){
-                        val responseBody =  response.body()
-                        val token = responseBody!!.data.api_token
-                        API.token = token
-                        println("============token=${API.token}")
-                        val intent = Intent(this@MainActivity, HomeActivity::class.java)
-                        startActivity(intent)
+            if(ed_name.text.isNullOrEmpty() || ed_password.text.isNullOrEmpty()){
+                Toast.makeText(this@MainActivity,"請輸入帳號密碼", Toast.LENGTH_SHORT).show()
+            }else{
+                API.apiInterface.login(
+                    LoginRequest(
+                        ed_password.text.toString(),
+                        ed_name.text.toString()
+                    )
+                ).enqueue(object: Callback<LoginResponse>{
+                    override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                        println("=================$t")
                     }
-                }
-            })
+                    override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                        if (response.code() == 200){
+                            val responseBody =  response.body()
+                            val token = responseBody!!.data.api_token
+                            API.token = token
+                            println("============token=${API.token}")
+                            val intent = Intent(this@MainActivity, HomeActivity::class.java)
+                            startActivity(intent)
+                        }else if(response.code() == 404){
+                            Toast.makeText(this@MainActivity,"無此帳號", Toast.LENGTH_SHORT).show()
+                        }else if(response.code() == 401){
+                            Toast.makeText(this@MainActivity,"密碼錯誤", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                })
+            }
         }
     }
 }

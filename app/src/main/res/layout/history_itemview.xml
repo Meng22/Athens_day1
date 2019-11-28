@@ -2,29 +2,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content" android:layout_marginBottom="5dp">
+              android:layout_height="wrap_content" android:layout_marginBottom="5dp" android:paddingTop="10dp"
+              android:paddingLeft="5dp" android:padding="5dp">
 
     <TextView
             android:text="貨品：蘋果"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:id="@+id/history_name" android:textSize="18sp"
             android:textColor="#33363b"/>
+    <TextView
+            android:text="斯巴達 - 阿卡迪亞"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/history_where" android:layout_weight="1"
+            android:layout_marginTop="5dp" android:textSize="15sp"/>
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent" android:layout_marginTop="3dp">
         <TextView
-                android:text="斯巴達 - 阿卡迪亞"
+                android:text="里程：20公里"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/history_where" android:layout_weight="1"/>
+                android:layout_height="wrap_content" android:id="@+id/history_distance" android:layout_weight="1"
+                android:textSize="14sp"/>
         <TextView
-                android:text="20公里"
+                android:text="重量：500g"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/history_distance" android:layout_weight="1"/>
-        <TextView
-                android:text="500g"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/history_weight" android:layout_weight="1"/>
+                android:layout_height="wrap_content" android:id="@+id/history_weight" android:layout_weight="1"
+                android:textSize="14sp"/>
     </LinearLayout>
     <View
             android:id="@+id/divider"

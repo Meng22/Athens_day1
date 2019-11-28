@@ -31,6 +31,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/dialog_des" android:textSize="16sp"
             android:text="即將送往：" android:layout_gravity="center" android:layout_marginTop="5dp"/>
+    <TextView
+            android:text="貨品總重："
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/dialog_weight" android:layout_marginTop="5dp"
+            android:textSize="16sp" android:layout_gravity="center" android:gravity="center"/>
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="wrap_content"

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content" android:padding="10dp">
+    <TextView
+            android:text="跑者等級"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/medal_titla" android:textSize="24sp"
+            android:layout_gravity="center" android:textColor="#2d2d2d"/>
+    <TextView
+            android:text="精進級"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/medal_level" android:textSize="18sp"
+            android:layout_marginTop="5dp" android:layout_gravity="center"/>
+    <ImageView
+            android:layout_width="110dp"
+            app:srcCompat="@drawable/ic_level1"
+            android:layout_height="110dp"
+            android:id="@+id/medal_image" android:layout_marginTop="10dp" android:layout_gravity="center"
+            android:scaleType="fitXY"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/medal_number" android:textSize="16sp"
+            android:text="再跑多一點就可以晉級囉～" android:layout_gravity="center" android:layout_marginTop="10dp"/>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_marginTop="15dp" android:layout_gravity="center">
+        <Button
+                android:text="繼續加油"
+                android:background="@drawable/ic_solid_rectangle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/btn_check" android:layout_weight="1"
+                android:layout_marginLeft="10dp" android:textColor="#ffffff"/>
+    </LinearLayout>
+</LinearLayout>

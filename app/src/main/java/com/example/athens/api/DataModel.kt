@@ -40,7 +40,7 @@ data class GoodsData(
     val runner_id: Any,
     val start_station_id: Int,
     val status: String,
-    val weight: Int,
+    val weight: Float,
     val price: Int,
     val updated_at: String,
     val photo_url: String
@@ -67,7 +67,7 @@ data class TaskData(
     val start_station_name: String,
     val status: String,
     val updated_at: String,
-    val weight: Int
+    val weight: Float
 )
 
 data class MyTaskResponse(
@@ -81,7 +81,7 @@ data class MyTaskResponse(
     val start_station_id: Int,
     val status: String,
     val updated_at: String,
-    val weight: Int,
+    val weight: Float,
     val photo_url: String
 
 )
@@ -110,7 +110,7 @@ data class ShipmentData(
     val runner_id: Int,
     val start_station_id: Int,
     val status: String,
-    val weight: Int,
+    val weight: Float,
     val price: Int,
     val updated_at: String,
     val photo_url: String
@@ -146,9 +146,10 @@ data class HistoryData(
     val start_station_id: Int,
     val status: String,
     val updated_at: String,
-    val weight: Int,
+    val weight: Double,
     val start_station_name: String,
-    val des_station_name: String
+    val des_station_name: String,
+    val distance: Int
     )
 
 data class CancelRequest(
@@ -173,5 +174,5 @@ data class CancelData(
     val start_station_name: String,
     val status: String,
     val updated_at: String,
-    val weight: Int
+    val weight: Double
 )

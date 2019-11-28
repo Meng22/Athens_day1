@@ -37,7 +37,7 @@ class GoodsAdapter: RecyclerView.Adapter<GoodsAdapter.ViewHolder>() {
     inner class ViewHolder(view: View): RecyclerView.ViewHolder(view){
         val image = view.findViewById<ImageView>(R.id.goods_image)
         val name = view.findViewById<TextView>(R.id.goods_name)
-        val weight = view.findViewById<TextView>(R.id.goods_weight)
+        val price = view.findViewById<TextView>(R.id.goods_price)
         val station = view.findViewById<TextView>(R.id.goods_station)
         val status = view.findViewById<TextView>(R.id.goods_status)
 
@@ -46,7 +46,7 @@ class GoodsAdapter: RecyclerView.Adapter<GoodsAdapter.ViewHolder>() {
             name.text = "訂單名稱：${item.good_name}"
             showStation(item.des_station_id, station)
             status.text = "貨品狀態：${item.status}"
-            weight.text = ""
+            price.text = "運送費用：${item.price}"
             itemView.setOnClickListener{
                 sendListener?.toClick(item)
             }

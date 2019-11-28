@@ -85,8 +85,8 @@
                 app:layout_constraintEnd_toStartOf="@+id/guideline4">
             <ImageView
                     tools:src="@drawable/demo_image"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp" android:id="@+id/shipment_image" android:layout_marginRight="8dp"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp" android:id="@+id/shipment_image" android:layout_marginRight="8dp"
                     android:layout_gravity="center"/>
             <LinearLayout
                     android:orientation="vertical"
@@ -111,6 +111,11 @@
                         android:text="狀態：無"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:id="@+id/tv_status"
+                        android:layout_marginTop="4dp" android:textSize="15sp"/>
+                <TextView
+                        android:text="本單收入：無"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/tv_price"
                         android:layout_marginTop="4dp" android:textSize="15sp"/>
             </LinearLayout>
         </LinearLayout>

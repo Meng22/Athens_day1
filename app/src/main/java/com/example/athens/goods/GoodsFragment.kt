@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.athens.R
 import com.example.athens.api.*
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_shop.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -127,13 +128,12 @@ class ShopFragment : Fragment() {
                     val message = responsebody!!.message
                     Toast.makeText(context, message,Toast.LENGTH_SHORT).show()
                 }else if (response.code() == 409){
-                    println("===============$response")
-                    val responsebody = response.body()
-                    println("===============$responsebody")
-                    if (responsebody != null) {
-                        val message = responsebody.message
-                        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-                    }
+                    val responsebody = response.errorBody()!!.string()
+                    val gson = Gson()
+                    val errorMessage = gson.fromJson<ErrorMessage>(responsebody, ErrorMessage::class.java)
+                    println("409===========${errorMessage.message}")
+                    Toast.makeText(context, errorMessage.message, Toast.LENGTH_SHORT).show()
+
                 }
             }
         })
@@ -166,12 +166,14 @@ class ShopFragment : Fragment() {
         val dialog_message = view.findViewById<TextView>(R.id.dialog_message)
         val dialog_start = view.findViewById<TextView>(R.id.dialog_start)
         val dialog_des = view.findViewById<TextView>(R.id.dialog_des)
+        val dialog_weight = view.findViewById<TextView>(R.id.dialog_weight)
         val btn_confirm = view.findViewById<Button>(R.id.btn_confirm)
         val btn_cancel = view.findViewById<Button>(R.id.btn_cancel)
 
         Glide.with(dialog_image.context).load(item.photo_url).into(dialog_image)
         dialog_title.text = "訂單資訊"
         dialog_message.text = "是否要運送${item.good_name}呢？"
+        dialog_weight.text = "貨品總重：${item.weight} kg"
         showStart(dialog_start, item.start_station_id)
         showDes(dialog_des, item.des_station_id)
 
@@ -226,8 +228,8 @@ class ShopFragment : Fragment() {
             }
         }
     }
-
-
-
-
 }
+
+data class ErrorMessage(
+    val message: String
+)

@@ -36,8 +36,8 @@ class PortfolioAdapter: RecyclerView.Adapter<PortfolioAdapter.ViewHolder>() {
         fun binde(item: HistoryData){
             name.text = "貨品：${item.good_name}"
             where.text = "${item.start_station_name} ─ ${item.des_station_name}"
-//            distance.text = item.
-            weight.text = "${item.weight}g"
+            distance.text = "${item.distance} 公里"
+            weight.text = "${item.weight} kg"
         }
     }
     fun update(newList: MutableList<HistoryData>){

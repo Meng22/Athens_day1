@@ -6,6 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.athens.R
 import com.example.athens.api.*
@@ -42,6 +47,12 @@ class PortfolioFragment : Fragment() {
         showHistory()
         showMedal()
 
+        btn_level.setOnClickListener {
+            runnerLevel(badge)
+        }
+        btn_accomplishment.setOnClickListener {
+            Toast.makeText(context, "蒐集成就，功能尚未開放", Toast.LENGTH_SHORT).show()
+        }
     }
     fun showHistory(){
         API.apiInterface.runnerHistory().enqueue(object: Callback<HistoryResponse> {
@@ -55,6 +66,7 @@ class PortfolioFragment : Fragment() {
 
                     if(!isResumed) return
                     portfolioAdapter.update(historyList)
+
                 }
             }
         })
@@ -74,16 +86,27 @@ class PortfolioFragment : Fragment() {
                     badge = badge_name
 
                     if(!isResumed) return
-                    total_distance.text = "${totalDistance}.0"
-
+                    total_distance.text = "${totalDistance}"
                 }
             }
         })
     }
+    fun runnerLevel(medal: String) {
+        val inflater = LayoutInflater.from(this.context)
+        val view = inflater.inflate(R.layout.medal_dialog_view, null)
+        val dialog_medal = AlertDialog.Builder(this.context!!)
+            .setView(view)
+            .show()
+        val medal_name = view.findViewById<TextView>(R.id.medal_level)
+        val medal_image = view.findViewById<ImageView>(R.id.medal_image)
+        val medal_num = view.findViewById<TextView>(R.id.medal_number)
+        val btn_check = view.findViewById<TextView>(R.id.btn_check)
 
+        medal_name.text = medal
+        btn_check.setOnClickListener {
+            dialog_medal.dismiss()
+        }
 
-
-
-
+    }
 
 }
