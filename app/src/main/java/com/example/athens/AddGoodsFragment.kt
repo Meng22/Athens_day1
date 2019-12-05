@@ -25,6 +25,7 @@ import android.content.Intent
 import com.bumptech.glide.Glide
 import android.content.ContentResolver
 import android.content.Context
+import android.icu.text.IDNA
 import android.net.Uri
 import android.provider.MediaStore
 import android.widget.Toast
@@ -48,24 +49,33 @@ class AddGoodsFragment : Fragment() {
     }
     private var uri : Uri? = null
     private var path: String? = null
+    private val infoFragment = InfoFragment()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_add_goods, container, false)
     }
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        val manager = (activity as StationActivity).supportFragmentManager
 
         //開啟相機權限
         cameraPermission()
 
+        //取相簿圖片
         goods_image.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
             startActivityForResult(intent, 2)
         }
 
+        //確認上船貨物
         addgoods_confirm.setOnClickListener {
             addGoods(path!!)
+        }
+
+        btn_back.setOnClickListener {
+            val transaction = manager.beginTransaction()
+            transaction.replace(R.id.framelayout_station, infoFragment).commit()
         }
 
     }

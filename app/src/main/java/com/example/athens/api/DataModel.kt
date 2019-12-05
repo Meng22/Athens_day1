@@ -213,3 +213,47 @@ data class UploadImageRequest(
 data class UploadImageResponse(
     val message: String
 )
+
+data class StationGoodsResponse(
+    val data: List<StationGoods>,
+    val message: String
+)
+
+data class StationGoods(
+    val created_at: String,
+    val des_station: DesStation,
+    val des_station_id: Int,
+    val description: String,
+    val id: Int,
+    val name: String,
+    val now_station: NowStation,
+    val now_station_id: Int,
+    val photo_url: String,
+    val price: Int,
+    val start_station: StartStation,
+    val start_station_id: Int,
+    val status: String,
+    val updated_at: String,
+    val weight: Float
+)
+
+data class DesStation(
+    val created_at: String,
+    val id: Int,
+    val name: String,
+    val updated_at: String
+)
+
+data class NowStation(
+    val created_at: String,
+    val id: Int,
+    val name: String,
+    val updated_at: String
+)
+
+data class StartStation(
+    val created_at: String,
+    val id: Int,
+    val name: String,
+    val updated_at: String
+)

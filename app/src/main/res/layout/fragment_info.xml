@@ -51,15 +51,43 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar_info"/>
-    <androidx.constraintlayout.widget.Guideline
+            app:layout_constraintTop_toBottomOf="@id/linear_search" app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintVertical_bias="0.0"/>
+    <LinearLayout
             android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/guideline_start"
-            app:layout_constraintGuide_percent="0.04"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" app:layout_constraintTop_toBottomOf="@id/toolbar_info"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/linear_search" android:padding="5dp">
+        <com.example.athens.CustomEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:drawableLeft="@drawable/ic_search_black_24dp"
+                android:background="@drawable/ic_search_shape"
+                android:ems="10"
+                android:id="@+id/ed_search" android:hint=" 請輸入物品名稱"/>
+    </LinearLayout>
     <androidx.constraintlayout.widget.Guideline
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/guideline_end"
             app:layout_constraintGuide_percent="0.96"/>
+    <androidx.constraintlayout.widget.Guideline
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/guideline_start"
+            app:layout_constraintGuide_percent="0.04"/>
+    <pl.droidsonroids.gif.GifImageView
+            android:src="@drawable/waiting"
+            android:layout_width="50dp"
+            android:layout_height="50dp" android:id="@+id/gif_waiting"
+            app:layout_constraintStart_toStartOf="@+id/guideline_start"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+            app:layout_constraintTop_toTopOf="@+id/rv_allgoods"
+            app:layout_constraintBottom_toBottomOf="@+id/rv_allgoods" android:visibility="visible"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

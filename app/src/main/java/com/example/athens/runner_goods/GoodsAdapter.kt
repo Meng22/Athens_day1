@@ -23,7 +23,7 @@ class GoodsAdapter: RecyclerView.Adapter<GoodsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.goods_itemview, parent, false)
+        val view = inflater.inflate(R.layout.runner_goods_itemview, parent, false)
         return ViewHolder(view)
     }
 

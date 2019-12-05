@@ -58,4 +58,8 @@ interface Api_Interface {
     @POST("/api/image")
     fun uploadImage(@Part photo: MultipartBody.Part, @Part good_id: MultipartBody.Part) : Call<UploadImageResponse>
 
+    //驛站查看商品
+    @GET("/api/goods")
+    fun stationInfo(): Call<StationGoodsResponse>
+
 }
