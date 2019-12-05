@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".AddGoodsFragment">
+    <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#005493"
+            android:theme="?attr/actionBarTheme"
+            android:minHeight="?attr/actionBarSize" android:id="@+id/toolbar_add_goods"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+        <Button
+                android:id="@+id/btn_back"
+                android:layout_width="wrap_content"
+                android:drawableLeft="@drawable/ic_back"
+                android:background="@color/transparent"
+                android:layout_height="wrap_content" android:text="待配送貨品" tools:layout_editor_absoluteY="4dp"
+                tools:layout_editor_absoluteX="16dp" android:textColor="#FCFFFFFF" android:textSize="20sp"/>
+
+    </androidx.appcompat.widget.Toolbar>
+    <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:id="@+id/goods_image"
+            android:background="#DD7C7A7A"
+            app:layout_constraintDimensionRatio="w,1:1"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_add_goods"
+            android:layout_marginBottom="24dp" app:layout_constraintBottom_toTopOf="@+id/tv_goods_name"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp" app:layout_constraintStart_toStartOf="@+id/guideline_start"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+    />
+    <TextView
+            android:text="物品名稱"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/tv_goods_name"
+            android:textColor="#414141" android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/guideline_start"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_goods_describe"/>
+    <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="8"
+            android:background="@drawable/edittext_shape"
+            android:id="@+id/ed_goods_name"
+            android:textSize="20sp" app:layout_constraintStart_toEndOf="@+id/tv_goods_name"
+            android:layout_marginStart="12dp" android:layout_marginLeft="12dp"
+            app:layout_constraintTop_toTopOf="@+id/tv_goods_name"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_end" android:text="test"/>
+
+    <TextView
+            android:text="物品描述"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/tv_goods_describe"
+            android:textColor="#414141" android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/guideline_start"
+            app:layout_constraintBottom_toTopOf="@+id/guideline_central"/>
+    <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="8"
+            android:background="@drawable/edittext_shape"
+            android:id="@+id/ed_goods_describe"
+            android:textSize="20sp" app:layout_constraintStart_toEndOf="@+id/tv_goods_describe"
+            android:layout_marginStart="12dp" android:layout_marginLeft="12dp"
+            app:layout_constraintTop_toTopOf="@+id/tv_goods_describe"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_end" android:text="test"/>
+
+    <TextView
+            android:text="重量"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/tv_goods_weight"
+            android:textColor="#414141" android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_goods_describe" android:layout_marginTop="24dp"
+            app:layout_constraintStart_toStartOf="@+id/guideline_start"/>
+    <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="8"
+            android:background="@drawable/edittext_shape"
+            android:id="@+id/ed_goods_weight"
+            android:textSize="20sp" app:layout_constraintStart_toEndOf="@+id/tv_goods_weight"
+            android:layout_marginStart="12dp" android:layout_marginLeft="12dp"
+            app:layout_constraintTop_toTopOf="@+id/tv_goods_weight"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_end" android:text="10"/>
+
+    <TextView
+            android:text="現在位置"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/tv_goods_location"
+            android:textColor="#414141" android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/guideline_start"
+            android:layout_marginTop="24dp" app:layout_constraintTop_toBottomOf="@+id/tv_goods_weight"/>
+    <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="8"
+            android:background="@drawable/edittext_shape"
+            android:id="@+id/ed_goods_location"
+            android:textSize="20sp" app:layout_constraintStart_toEndOf="@+id/tv_goods_location"
+            android:layout_marginStart="12dp" android:layout_marginLeft="12dp"
+            app:layout_constraintTop_toTopOf="@+id/tv_goods_location"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_end" android:text="雅典"/>
+
+    <TextView
+            android:text="目的地"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/tv_goods_destination"
+            android:textColor="#414141" android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/guideline_start" android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_goods_location"/>
+    <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="8"
+            android:background="@drawable/edittext_shape"
+            android:id="@+id/ed_goods_destination"
+            android:textSize="20sp" app:layout_constraintStart_toEndOf="@+id/tv_goods_destination"
+            android:layout_marginStart="12dp" android:layout_marginLeft="12dp"
+            app:layout_constraintTop_toTopOf="@+id/tv_goods_destination"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_end" android:text="斯巴達"/>
+
+    <TextView
+            android:text="運費"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/tv_goods_fee"
+            android:textColor="#414141" android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/guideline_start"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_goods_destination"/>
+    <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="8"
+            android:background="@drawable/edittext_shape"
+            android:id="@+id/ed_goods_fee"
+            android:textSize="20sp" app:layout_constraintStart_toEndOf="@+id/tv_goods_fee"
+            android:layout_marginStart="12dp" android:layout_marginLeft="12dp"
+            app:layout_constraintTop_toTopOf="@+id/tv_goods_fee"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_end" android:text="1200"/>
+    <Button
+            android:text="上傳並新增"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_textview_shape"
+            android:id="@+id/addgoods_confirm" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintBottom_toTopOf="@+id/guideline_bottom" android:textColor="#EBFFFFFF"/>
+    <androidx.constraintlayout.widget.Guideline
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/guideline_bottom"
+            app:layout_constraintGuide_percent="0.98"/>
+    <androidx.constraintlayout.widget.Guideline
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/guideline_start"
+            app:layout_constraintGuide_percent="0.15"/>
+    <androidx.constraintlayout.widget.Guideline
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/guideline_end"
+            app:layout_constraintGuide_percent="0.85"/>
+    <androidx.constraintlayout.widget.Guideline
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/guideline_central"
+            app:layout_constraintGuide_percent="0.5"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

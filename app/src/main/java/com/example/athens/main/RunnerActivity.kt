@@ -1,14 +1,14 @@
-package com.example.athens
+package com.example.athens.main
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import com.example.athens.goods.ShopFragment
-import com.example.athens.mission.MissionFragment
-import com.example.athens.portfolio.PortfolioFragment
+import com.example.athens.R
+import com.example.athens.runner_goods.ShopFragment
+import com.example.athens.runner_mission.MissionFragment
+import com.example.athens.runner_portfolio.PortfolioFragment
 
-class HomeActivity : AppCompatActivity() {
+class RunnerActivity : AppCompatActivity() {
 
     private val manager = supportFragmentManager
     private val shopFragment = ShopFragment()
@@ -17,20 +17,20 @@ class HomeActivity : AppCompatActivity() {
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
-            R.id.nav_shop -> {
+            R.id.nav_station -> {
                 val transaction = manager.beginTransaction()
-                transaction.replace(R.id.framelayout, shopFragment).commit()
+                transaction.replace(R.id.framelayout_runner, shopFragment).commit()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.nav_mission -> {
                 val transaction = manager.beginTransaction()
-                transaction.replace(R.id.framelayout, missionFragment).commit()
+                transaction.replace(R.id.framelayout_runner, missionFragment).commit()
 
                 return@OnNavigationItemSelectedListener true
             }
             R.id.nav_portfolio -> {
                 val transaction = manager.beginTransaction()
-                transaction.replace(R.id.framelayout, portfolioFragment).commit()
+                transaction.replace(R.id.framelayout_runner, portfolioFragment).commit()
 
                 return@OnNavigationItemSelectedListener true
             }
@@ -40,13 +40,13 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        setContentView(R.layout.activity_runner)
 
         //初始畫面
         val transaction = manager.beginTransaction()
-        transaction.replace(R.id.framelayout, shopFragment).commit()
+        transaction.replace(R.id.framelayout_runner, shopFragment).commit()
         //導覽列
-        val navView: BottomNavigationView = findViewById(R.id.nav_view)
+        val navView: BottomNavigationView = findViewById(R.id.nav_runner)
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
 

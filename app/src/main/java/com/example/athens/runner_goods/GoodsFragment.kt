@@ -1,4 +1,4 @@
-package com.example.athens.goods
+package com.example.athens.runner_goods
 
 
 import android.os.Bundle
@@ -42,7 +42,6 @@ class ShopFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_shop, container, false)
-
     }
 
     override fun onCreateAnimation(transit: Int, enter: Boolean, nextAnim: Int): Animation? {

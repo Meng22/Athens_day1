@@ -1,4 +1,4 @@
-package com.example.athens.mission
+package com.example.athens.runner_mission
 
 
 import android.Manifest
@@ -16,14 +16,13 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
-import com.example.athens.HomeActivity
+import com.example.athens.main.RunnerActivity
 import com.example.athens.R
 import com.example.athens.api.*
 
 import com.uuzuche.lib_zxing.activity.CaptureActivity
 import com.uuzuche.lib_zxing.activity.CodeUtils
 import kotlinx.android.synthetic.main.fragment_mission.*
-import kotlinx.android.synthetic.main.fragment_portfolio.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -81,7 +80,7 @@ class MissionFragment : Fragment() {
         initial()
 
         //相機權限
-        permission()
+        cameraPermission()
 
         //載入跑者目前訂單
         myTask()
@@ -136,10 +135,8 @@ class MissionFragment : Fragment() {
             MY_PERMISSIONS_REQUEST_READ_CONTACTS -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 } else {
-                    (activity as HomeActivity).finish()
+                    (activity as RunnerActivity).finish()
                 }
-                com.example.athens.println("=========$permissions")
-                com.example.athens.println("=========$grantResults")
                 return
             }
         }
@@ -174,21 +171,23 @@ class MissionFragment : Fragment() {
     }
 
     //相機權限
-    fun permission(){
-        if (ContextCompat.checkSelfPermission(this.context!!,  Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale((activity as HomeActivity), Manifest.permission.CAMERA)) {
+    fun cameraPermission(){
+        if (ContextCompat.checkSelfPermission(this.context!!,  Manifest.permission.CAMERA)
+            != PackageManager.PERMISSION_GRANTED) {  //判斷是否未取得權限(!=)
+            if (ActivityCompat.shouldShowRequestPermissionRationale((activity as RunnerActivity), Manifest.permission.CAMERA)) {
                 AlertDialog.Builder(this.context!!)
                     .setMessage("我需要相機才能送貨，給我權限吧？")
                     .setPositiveButton("OK") { _, _ ->
-                        ActivityCompat.requestPermissions((activity as HomeActivity),
+                        //跳出視窗，嘗試向使用者取得權限
+                        ActivityCompat.requestPermissions((activity as RunnerActivity),
                             arrayOf(Manifest.permission.CAMERA),
                             MY_PERMISSIONS_REQUEST_READ_CONTACTS
                         )
                     }
-                    .setNegativeButton("No") { _, _ -> (activity as HomeActivity).finish() }
+                    .setNegativeButton("No") { _, _ -> (activity as RunnerActivity).finish() }
                     .show()
             } else {
-                ActivityCompat.requestPermissions((activity as HomeActivity),
+                ActivityCompat.requestPermissions((activity as RunnerActivity),
                     arrayOf(Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE),
                     MY_PERMISSIONS_REQUEST_READ_CONTACTS
                 )

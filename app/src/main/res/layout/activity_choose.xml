@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".main.ChooseActivity" android:background="#0077be">
+    <TextView
+            android:text="選擇驛站"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textview" android:textColor="#E9FFFFFF"
+            android:textSize="30sp" android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/guideline12"
+            app:layout_constraintEnd_toStartOf="@+id/guideline13"
+            android:layout_marginBottom="60dp" app:layout_constraintBottom_toTopOf="@+id/entry_athens"/>
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:srcCompat="@drawable/flag_athens" android:id="@+id/entry_athens"
+            android:background="#ffffff"
+            app:layout_constraintEnd_toStartOf="@+id/guideline14" android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp" app:layout_constraintStart_toStartOf="@+id/guideline12"
+            android:layout_marginBottom="50dp" app:layout_constraintBottom_toTopOf="@+id/entry_arcadia"/>
+    <androidx.constraintlayout.widget.Guideline
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/guideline10"
+            app:layout_constraintGuide_percent="0.03"/>
+    <androidx.constraintlayout.widget.Guideline
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/guideline11"
+            app:layout_constraintGuide_percent="0.9"/>
+    <androidx.constraintlayout.widget.Guideline
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/guideline14"
+            app:layout_constraintGuide_percent="0.5"/>
+    <androidx.constraintlayout.widget.Guideline
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/guideline12"
+            app:layout_constraintGuide_percent="0.03"/>
+    <androidx.constraintlayout.widget.Guideline
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/guideline13"
+            app:layout_constraintGuide_percent="0.97"/>
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:srcCompat="@drawable/flag_phokis"
+            android:id="@+id/imageView4"
+            android:background="#ffffff" app:layout_constraintStart_toStartOf="@+id/guideline14"
+            app:layout_constraintEnd_toStartOf="@+id/guideline13"
+            app:layout_constraintTop_toTopOf="@+id/entry_athens"/>
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:srcCompat="@drawable/flag_arkadia"
+            android:id="@+id/entry_arcadia"
+            android:background="#ffffff" app:layout_constraintStart_toStartOf="@+id/guideline12"
+            app:layout_constraintEnd_toStartOf="@+id/guideline14" android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline11" android:layout_marginBottom="24dp"/>
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:srcCompat="@drawable/flag_sparta"
+            android:id="@+id/entry_sparta"
+            android:background="#ffffff"
+            app:layout_constraintTop_toTopOf="@+id/entry_arcadia" app:layout_constraintEnd_toStartOf="@+id/guideline13"
+            app:layout_constraintStart_toStartOf="@+id/guideline14"
+    />
+</androidx.constraintlayout.widget.ConstraintLayout>

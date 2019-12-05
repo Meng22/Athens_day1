@@ -1,17 +1,19 @@
 package com.example.athens.api
 
+import okhttp3.MultipartBody
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface Api_Interface {
+    //註冊
     @POST("/api/register")
     fun register(@Body registerRequest: RegisterRequest): Call<RegisterResponse>
 
+    //登入
     @POST("/api/login")
     fun login(@Body loginRequest: LoginRequest): Call<LoginResponse>
 
+    //======================================runner
     @GET("/api/preparedTasks")
     fun showGoods(): Call<GoodsResponse>
 
@@ -42,4 +44,18 @@ interface Api_Interface {
     //跑者運送紀錄
     @GET("/api/runnerHistory")
     fun runnerHistory(): Call<HistoryResponse>
+
+
+
+    //=================================station
+
+    //新增貨物
+    @POST("/api/goods")
+    fun addGoods(@Body addGoodsRequest: AddGoodsRequest): Call<AddGoodsResponse>
+
+    //上傳圖片
+    @Multipart
+    @POST("/api/image")
+    fun uploadImage(@Part photo: MultipartBody.Part, @Part good_id: MultipartBody.Part) : Call<UploadImageResponse>
+
 }

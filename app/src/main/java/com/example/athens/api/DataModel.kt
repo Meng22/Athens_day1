@@ -8,7 +8,7 @@ data class RegisterRequest(
 data class RegisterResponse(
     val message: String
 )
-
+//登入
 data class LoginRequest(
     val password: String,
     val username: String
@@ -24,9 +24,11 @@ data class UserData(
     val id: Int,
     val role_id: Int,
     val updated_at: String,
-    val username: String
+    val username: String,
+    val role_name: String
 )
 
+//查看各驛站任務
 data class GoodsResponse(
     val message: String,
     val data: List<GoodsData>
@@ -46,6 +48,7 @@ data class GoodsData(
     val photo_url: String
 )
 
+//接案
 data class TaskRequest(
     val shipment_id: Int
 )
@@ -70,6 +73,7 @@ data class TaskData(
     val weight: Float
 )
 
+//查看我的案子
 data class MyTaskResponse(
     val created_at: String,
     val des_station_id: Int,
@@ -88,11 +92,10 @@ data class MyTaskResponse(
 
 
 
-
+//checkin/checkout
 data class CheckinRequest(
     val start_station_name: String
 )
-
 data class CheckoutRequest(
     val des_station_name: String
 )
@@ -100,7 +103,6 @@ data class CheckResponse(
     val data: ShipmentData?,
     val message: String
 )
-
 data class ShipmentData(
     val created_at: String,
     val des_station_id: Int,
@@ -116,11 +118,11 @@ data class ShipmentData(
     val photo_url: String
 )
 
+//個人成就
 data class medalStatusResponse(
     val data: medalData,
     val message: String
 )
-
 data class medalData(
     val badge_id: Int,
     val badge_name: String,
@@ -131,6 +133,7 @@ data class medalData(
     val updated_at: String
 )
 
+//個人歷史跑量
 data class HistoryResponse(
     val data: List<HistoryData>,
     val message: String
@@ -152,6 +155,7 @@ data class HistoryData(
     val distance: Int
     )
 
+//註銷任務
 data class CancelRequest(
     val shipment_id: Int
 )
@@ -159,7 +163,6 @@ data class CancelResponse(
     val data: List<CancelData>?,
     val message: String
 )
-
 data class CancelData(
     val created_at: String,
     val des_station_id: Int,
@@ -175,4 +178,38 @@ data class CancelData(
     val status: String,
     val updated_at: String,
     val weight: Double
+)
+
+//上傳任務
+data class AddGoodsRequest(
+    val name: String,
+    val description: String,
+    val price: Int,
+    val start_station_name: String,
+    val des_station_name: String,
+    val weight: Int
+)
+data class AddGoodsResponse(
+    val data: GoodData,
+    val message: String
+)
+data class GoodData(
+    val des_station_id: Int,
+    val description: String,
+    val id: Int,
+    val name: String,
+    val now_station_id: Int,
+    val photo_url: String,
+    val price: String,
+    val start_station_id: Int,
+    val status: String,
+    val weight: String
+)
+
+//上傳圖片
+data class UploadImageRequest(
+    val good_id: Int
+)
+data class UploadImageResponse(
+    val message: String
 )

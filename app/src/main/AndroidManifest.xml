@@ -3,15 +3,15 @@
           package="com.example.athens">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- 相機相簿 -->
     <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- 撥打電話 -->
     <uses-permission android:name="android.permission.VIBRATE"/>
-    <!--撥打電話-->
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
-    <meta-data
-            android:name="com.google.android.gms.vision.DEPENDENCIES"
-            android:value="barcode"/>
 
     <application
             android:name=".CustomApplication"
@@ -23,18 +23,33 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
-                android:name=".HomeActivity"
+                android:name=".main.StationActivity"
+                android:label="@string/title_activity_station">
+        </activity>
+        <activity android:name=".main.ChooseActivity">
+        </activity>
+        <activity
+                android:name=".main.RunnerActivity"
                 android:label="@string/title_activity_home">
         </activity>
-        <activity android:name=".ScanActivity">
-        </activity>
-        <activity android:name=".MainActivity">
+
+        <activity android:name=".main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <provider
+                android:name="androidx.core.content.FileProvider"
+                android:authorities="com.example.athens.fileprovider"
+                android:exported="false"
+                android:grantUriPermissions="true">
+            <meta-data
+                    android:name="android.support.FILE_PROVIDER_PATHS"
+                    android:resource="@xml/provider_paths" />
+        </provider>
     </application>
+
 
 </manifest>

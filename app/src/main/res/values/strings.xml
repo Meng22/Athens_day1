@@ -14,4 +14,6 @@
         <item>阿卡迪亞</item>
         <item>斯巴達</item>
     </string-array>
+    <string name="title_activity_station">StationActivity</string>
+    <string name="title_activity_add_goods">AddGoodsActivity</string>
 </resources>

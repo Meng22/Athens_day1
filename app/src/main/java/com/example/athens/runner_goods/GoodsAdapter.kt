@@ -1,4 +1,4 @@
-package com.example.athens.goods
+package com.example.athens.runner_goods
 
 import android.view.LayoutInflater
 import android.view.View
