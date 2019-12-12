@@ -1,0 +1,36 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="wrap_content"
+              android:background="@drawable/ic_solid_rectangle_dialog"
+              android:layout_height="wrap_content" android:padding="20dp">
+
+    <TextView
+            android:text="物品資訊"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/stationDialog_title" android:textSize="24sp"
+            android:layout_gravity="center" android:textColor="#2d2d2d"/>
+    <ImageView
+            android:layout_width="110dp"
+            android:src="@drawable/demo_image"
+            android:layout_height="110dp"
+            android:id="@+id/stationDialog_image" android:layout_marginTop="5dp" android:layout_gravity="center"
+            android:scaleType="fitXY"/>
+    <TextView
+            android:text="物品名稱：Max粉袋\n重量：6.0\n描述：活體\n狀態：運送中\n現在位置：斯巴達\n目的地：菲基斯"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/stationDialog_details" android:textSize="18sp"
+            android:layout_gravity="center" android:layout_marginTop="10dp"/>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_marginTop="15dp" android:layout_gravity="center">
+
+        <Button
+                android:text="OK"
+                android:background="@drawable/ic_confirm_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/stationDialog_confirm" android:layout_weight="1"
+        />
+    </LinearLayout>
+</LinearLayout>

@@ -1,4 +1,4 @@
-package com.example.athens;
+package com.example.athens.station.station_Iifo;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -10,6 +10,7 @@ import android.view.View;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
+import com.example.athens.R;
 
 
 public class CustomEditText extends AppCompatEditText implements View.OnTouchListener, View.OnFocusChangeListener, TextWatcher {

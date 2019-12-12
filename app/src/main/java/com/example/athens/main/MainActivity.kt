@@ -14,6 +14,10 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
+    companion object {
+        private const val RUNNER_REQUEST = 11
+        private const val STATION_REQUEST = 12
+    }
     private var role = "runner"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,10 +27,10 @@ class MainActivity : AppCompatActivity() {
                 val isOpened = switch_view.isOpened
                 if (isOpened){
                     role = "station"
-                    com.example.athens.println("===========$role")
+                    println("===========$role")
                 }else{
                     role = "runner"
-                    com.example.athens.println("===========$role")
+                    println("===========$role")
                 }
             }
         })
@@ -44,7 +48,7 @@ class MainActivity : AppCompatActivity() {
                     )
                 ).enqueue(object : Callback<RegisterResponse>{
                     override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
-                        com.example.athens.println("=================$t")
+                        println("=================$t")
                     }
 
                     override fun onResponse(call: Call<RegisterResponse>, response: Response<RegisterResponse>) {
@@ -75,7 +79,7 @@ class MainActivity : AppCompatActivity() {
                     )
                 ).enqueue(object: Callback<LoginResponse>{
                     override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                        com.example.athens.println("=================$t")
+                        println("=================$t")
                     }
                     override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                         if (response.code() == 200){
@@ -83,14 +87,18 @@ class MainActivity : AppCompatActivity() {
                             val token = responseBody!!.data.api_token
                             val role_name = responseBody.data.role_name
                             API.token = token
-                            com.example.athens.println("============token=${API.token}")
+                            println("============token=${API.token}")
 
                             if (role_name == "runner"){   //跑者頁面
                                 val intent = Intent(this@MainActivity, RunnerActivity::class.java)
-                                startActivity(intent)
+                                startActivityForResult(intent, RUNNER_REQUEST)
                             }else if (role_name == "station"){   //管理者頁面
-                                val intent = Intent(this@MainActivity, ChooseActivity::class.java)
-                                startActivity(intent)
+                                if (switch_view.isOpened){
+                                    val intent = Intent(this@MainActivity, ChooseActivity::class.java)
+                                    startActivityForResult(intent, STATION_REQUEST)
+                                }else{
+                                    Toast.makeText(this@MainActivity,"無此帳號", Toast.LENGTH_SHORT).show()
+                                }
                             }
                         }
                         else if(response.code() == 404){

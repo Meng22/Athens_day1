@@ -214,11 +214,12 @@ data class UploadImageResponse(
     val message: String
 )
 
+
+//驛站物品
 data class StationGoodsResponse(
     val data: List<StationGoods>,
     val message: String
 )
-
 data class StationGoods(
     val created_at: String,
     val des_station: DesStation,
@@ -236,24 +237,35 @@ data class StationGoods(
     val updated_at: String,
     val weight: Float
 )
-
 data class DesStation(
     val created_at: String,
     val id: Int,
     val name: String,
     val updated_at: String
 )
-
 data class NowStation(
     val created_at: String,
     val id: Int,
     val name: String,
     val updated_at: String
 )
-
 data class StartStation(
     val created_at: String,
     val id: Int,
     val name: String,
+    val updated_at: String
+)
+
+//驛站等級
+data class StationLevelResponse(
+    val data: List<StationDetails>
+)
+data class StationDetails(
+    val created_at: String,
+    val id: Int,
+    val income: Int,
+    val level: Int,
+    val name: String,
+    val totalWeight: Float,
     val updated_at: String
 )

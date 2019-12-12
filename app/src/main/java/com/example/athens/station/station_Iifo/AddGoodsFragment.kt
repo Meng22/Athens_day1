@@ -1,4 +1,4 @@
-package com.example.athens
+package com.example.athens.station.station_Iifo
 
 
 import android.Manifest
@@ -23,15 +23,16 @@ import retrofit2.Response
 import java.io.File
 import android.content.Intent
 import com.bumptech.glide.Glide
-import android.content.ContentResolver
 import android.content.Context
-import android.icu.text.IDNA
+import android.graphics.Color
 import android.net.Uri
 import android.provider.MediaStore
+import android.widget.ArrayAdapter
 import android.widget.Toast
+import com.example.athens.R
 import com.example.athens.api.*
 import kotlinx.android.synthetic.main.fragment_add_goods.goods_image
-import okhttp3.MediaType
+import kotlinx.android.synthetic.main.fragment_info.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -43,13 +44,14 @@ private const val ARG_PARAM2 = "param2"
  * A simple [Fragment] subclass.
  *
  */
-class AddGoodsFragment : Fragment() {
+class AddGoodsFragment(val mode: Int) : Fragment() {
     companion object {
         private const val MY_PERMISSIONS_REQUEST_READ_CONTACTS = 100
     }
     private var uri : Uri? = null
     private var path: String? = null
-    private val infoFragment = InfoFragment()
+    private val infoFragment = InfoFragment(mode)
+    private val options = listOf("雅典", "菲基斯", "阿卡迪亞", "斯巴達")
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_add_goods, container, false)
@@ -57,6 +59,30 @@ class AddGoodsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val manager = (activity as StationActivity).supportFragmentManager
+
+        switchColor(mode)
+
+        //預設地點
+        ed_goods_location.setText(setStation(mode))
+        ed_goods_location.setEnabled(false)
+
+        //目的地EditText
+        ed_goods_destination.setOnClickListener{
+            var choice = 0
+            val adapter = ArrayAdapter(context, android.R.layout.simple_dropdown_item_1line, options)
+            AlertDialog.Builder(this.context!!)
+                .setTitle("選擇配送地點")
+                .setSingleChoiceItems(adapter, 1) { dialog,i ->
+                    choice = i
+                    ed_goods_destination.setText(options[choice])
+                    dialog.dismiss()
+                }
+                .setNegativeButton("再想想"){dialog,_ ->
+                    dialog.cancel()
+                }
+                .show()
+        }
+
 
         //開啟相機權限
         cameraPermission()
@@ -114,10 +140,10 @@ class AddGoodsFragment : Fragment() {
             val cursor = resolver.query(uri, projection, null, null, null)
             cursor!!.moveToFirst()
             val index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA)
-            println("===========path=$index")
+            com.example.athens.main.println("===========path=$index")
             path = cursor.getString(index)
             cursor.close()
-            println("===========path=$path")
+            com.example.athens.main.println("===========path=$path")
         }
         return path
     }
@@ -134,7 +160,7 @@ class AddGoodsFragment : Fragment() {
                 if (response.code() == 200){
                     val responsebody = response.body()
                     val good_id = responsebody!!.data.id
-                    println("===========good_id=$good_id")
+                    com.example.athens.main.println("===========good_id=$good_id")
 
                     uploadImage(file_path, good_id)
                 }
@@ -185,6 +211,39 @@ class AddGoodsFragment : Fragment() {
                 )
             }
         }
+    }
+    fun switchColor(mode: Int) {
+        when (mode) {
+            1 -> {
+                toolbar_add_goods.setBackgroundColor(Color.rgb(0, 84, 147))
+            }
+            2 -> {
+                toolbar_add_goods.setBackgroundColor(Color.rgb(70, 124, 36))
+            }
+            3 -> {
+                toolbar_add_goods.setBackgroundColor(Color.rgb(245, 180, 51))
+            }
+            4 -> {
+                toolbar_add_goods.setBackgroundColor(Color.rgb(148, 17, 0))
+            }
+        }
+    }
+    fun setStation(mode: Int): String{
+        when (mode){
+            1 ->{
+                return "雅典"
+            }
+            2 ->{
+                return "菲基斯"
+            }
+            3 ->{
+                return "阿卡迪亞"
+            }
+            4 ->{
+                return "斯巴達"
+            }
+        }
+        return "雅典"
     }
 
 }

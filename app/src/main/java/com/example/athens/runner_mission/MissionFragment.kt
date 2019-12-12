@@ -59,7 +59,7 @@ class MissionFragment : Fragment() {
 
             //初始畫面
             initial()
-            com.example.athens.println("======刷新畫面")
+            com.example.athens.main.println("======刷新畫面")
 
         }else{
             isEnter = false

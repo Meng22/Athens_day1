@@ -1,4 +1,4 @@
-package com.example.athens
+package com.example.athens.station.station_Iifo
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.athens.api.GoodsData
+import com.example.athens.R
 import com.example.athens.api.StationGoods
 
 class InfoAdapter: RecyclerView.Adapter<InfoAdapter.ViewHolder>() {
@@ -46,7 +46,7 @@ class InfoAdapter: RecyclerView.Adapter<InfoAdapter.ViewHolder>() {
             weight.text = "重量：${item.weight}"
             status.text = "狀態：${item.status}"
             itemView.setOnClickListener{
-//                clickListener!!.toClick(item)
+                clickListener!!.toClick(item)
             }
         }
     }

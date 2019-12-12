@@ -1,4 +1,4 @@
-package com.example.athens
+package com.example.athens.main
 
 import android.app.Application
 import android.util.Log

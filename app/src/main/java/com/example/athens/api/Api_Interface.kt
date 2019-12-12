@@ -62,4 +62,8 @@ interface Api_Interface {
     @GET("/api/goods")
     fun stationInfo(): Call<StationGoodsResponse>
 
+    //驛站等級
+    @GET("/api/stations")
+    fun stationLevel(): Call<StationLevelResponse>
+
 }

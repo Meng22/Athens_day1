@@ -48,7 +48,7 @@ class ShopFragment : Fragment() {
         if (enter && !isEnter){
             isEnter = true
             renewList()
-            com.example.athens.println("======onCreateAnimation")
+            com.example.athens.main.println("======onCreateAnimation")
         }else{
             isEnter = false
         }
@@ -93,14 +93,14 @@ class ShopFragment : Fragment() {
     fun renewList(){
         API.apiInterface.showGoods().enqueue(object : Callback<GoodsResponse>{
             override fun onFailure(call: Call<GoodsResponse>, t: Throwable) {
-                com.example.athens.println("================$t")
+                com.example.athens.main.println("================$t")
             }
             override fun onResponse(call: Call<GoodsResponse>, response: Response<GoodsResponse>) {
                 if (response.code() == 200){
                     val responsebody = response.body()
                     val responselist = responsebody!!.data
                     val goodsList = responselist.toMutableList()
-                    com.example.athens.println("=============$goodsList")
+                    com.example.athens.main.println("=============$goodsList")
                     athensList = goodsList.filter { it.start_station_id == 1 }.toMutableList()
                     phokisList = goodsList.filter { it.start_station_id == 2 }.toMutableList()
                     arkadiaList = goodsList.filter { it.start_station_id == 3 }.toMutableList()
@@ -119,7 +119,7 @@ class ShopFragment : Fragment() {
     fun tasks(item: GoodsData){
         API.apiInterface.task(TaskRequest(item.id)).enqueue(object : Callback<TasksResponse>{
             override fun onFailure(call: Call<TasksResponse>, t: Throwable) {
-                com.example.athens.println("===============$t")
+                com.example.athens.main.println("===============$t")
             }
             override fun onResponse(call: Call<TasksResponse>, response: Response<TasksResponse>) {
                 if (response.isSuccessful){
@@ -184,7 +184,7 @@ class ShopFragment : Fragment() {
 //            //重新load資料
 //            renewList()
 //            updateLayout(item.start_station_id)
-//            com.example.athens.println("================${updateLayout(item.start_station_id)}")
+//            com.example.athens.main.println("================${updateLayout(item.start_station_id)}")
             dialog_mission.cancel()
 
         }

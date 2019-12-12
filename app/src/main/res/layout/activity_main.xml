@@ -14,6 +14,33 @@
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" android:scaleType="fitXY"
             app:layout_constraintHorizontal_bias="1.0" app:layout_constraintVertical_bias="0.0"/>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            app:layout_constraintBottom_toBottomOf="@+id/background" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="8dp" android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginRight="8dp" android:layout_marginEnd="8dp">
+        <Button
+                android:text="LOG IN"
+                android:layout_width="wrap_content"
+                android:background="@drawable/ic_solid_rectangle"
+                android:layout_height="wrap_content" android:id="@+id/btn_login"
+                android:textColor="#ffffff" android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp" android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="1"/>
+        <Button
+                android:text="REGISTER"
+                android:layout_width="wrap_content"
+                android:background="@drawable/ic_hollow_rectangle"
+                android:layout_height="wrap_content" android:id="@+id/btn_register"
+                android:textColor="#ffffff" android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp" android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="1"/>
+    </LinearLayout>
     <EditText
             android:layout_width="220dp"
             android:layout_height="wrap_content"
@@ -26,7 +53,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="8dp" android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginRight="8dp" android:layout_marginTop="280dp"
-            app:layout_constraintTop_toTopOf="@+id/background" android:text="JJJ"/>
+            app:layout_constraintTop_toTopOf="@+id/background"/>
     <EditText
             android:layout_width="220dp"
             android:layout_height="wrap_content"
@@ -38,7 +65,7 @@
             android:hint="跑者密碼" android:layout_marginStart="8dp" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="8dp" android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginRight="8dp" android:layout_marginTop="28dp"
-            app:layout_constraintTop_toBottomOf="@+id/ed_name" android:text="123"/>
+            app:layout_constraintTop_toBottomOf="@+id/ed_name"/>
     <ch.ielse.view.SwitchView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/switch_view"
@@ -46,25 +73,6 @@
             app:layout_constraintTop_toBottomOf="@+id/ed_password"
             app:layout_constraintStart_toEndOf="@+id/tv_question" android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"/>
-    <Button
-            android:text="LOG IN"
-            android:layout_width="200dp"
-            android:background="@drawable/ic_solid_rectangle"
-            android:layout_height="wrap_content" android:id="@+id/btn_login"
-            android:textColor="#ffffff" android:layout_marginStart="8dp" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="8dp" android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginRight="8dp" android:layout_marginBottom="150dp"
-            app:layout_constraintBottom_toBottomOf="@+id/background"/>
-    <Button
-            android:text="REGISTER"
-            android:layout_width="200dp"
-            android:background="@drawable/ic_hollow_rectangle"
-            android:layout_height="wrap_content" android:id="@+id/btn_register"
-            android:textColor="#ffffff" android:layout_marginStart="8dp" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="8dp" android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginRight="8dp"
-            app:layout_constraintHorizontal_bias="0.502" android:layout_marginTop="24dp"
-            app:layout_constraintTop_toBottomOf="@+id/btn_login"/>
     <ImageView
             android:layout_width="wrap_content"
             android:layout_height="120dp" app:srcCompat="@drawable/flag_athens" android:id="@+id/imageView"
