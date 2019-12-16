@@ -29,7 +29,7 @@ object API {
                         .header("Connection","keep-alive")
 
                     if(token != null){
-                        requestBuilder.addHeader("Authorization","Bearer $token")
+                        requestBuilder.addHeader("Authorization","$token")
                     }
                     return chain.proceed(requestBuilder.build())
                 }
@@ -38,7 +38,7 @@ object API {
 
         //retrofit實體
         return@lazy Retrofit.Builder()
-            .baseUrl("http://35.229.230.23")
+            .baseUrl("http://35.194.168.18")
             .client(myOkHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

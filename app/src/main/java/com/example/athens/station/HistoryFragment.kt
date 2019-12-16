@@ -31,7 +31,7 @@ private const val ARG_PARAM2 = "param2"
  *
  */
 class HistoryFragment(val mode: Int) : Fragment() {
-    private val station_historyAdapter = InfoAdapter()
+    private val station_historyAdapter = HistoryAdapter()
     private val station_historyList : MutableList<StationGoods> = arrayListOf()
 
 
